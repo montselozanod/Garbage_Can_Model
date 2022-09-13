@@ -190,7 +190,7 @@ def garbage_can(A, D, E, nel, K, Entry_m, Entry_w):
     return(Choices, Problems, Members, Choices_energy_required,
            Choices_energy_spent)
 
-Output = np.zeros((243, 4 + 14))  # to capture the results, 4 for markers
+Output = np.zeros((243, 5 + 15))  # to capture the results, 4 for markers
 count_1 = 0
 
 # SIMULATION
@@ -396,29 +396,32 @@ for x1 in np.arange(3):  # Net energy dist: 1.1, 2.2, 3.3
                     Output[count_1, 1] = x2  # Energy distribution
                     Output[count_1, 2] = x3  # Problems to choices
                     Output[count_1, 3] = x4  # Choices to decision makers
+                    Output[count_1, 4] = x5  # knowledge distribution
 
-                    Output[count_1, 4] = resolutions_mean
-                    Output[count_1, 5] = oversights_mean
-                    Output[count_1, 6] = flights_mean
-                    Output[count_1, 7] = quickies_mean
-                    Output[count_1, 8] = prob_unsolved_mean
-                    Output[count_1, 9] = prob_shifts_mean
-                    Output[count_1, 10] = prob_active_mean
-                    Output[count_1, 11] = prob_latency_mean
-                    Output[count_1, 12] = dm_active_mean
-                    Output[count_1, 13] = dm_shifts_mean
-                    Output[count_1, 14] = energy_spent_mean
-                    Output[count_1, 15] = energy_excess_mean
-                    Output[count_1, 16] = choices_unsolved_mean
-                    Output[count_1, 17] = choices_active_mean
+                    Output[count_1, 5] = resolutions_mean
+                    Output[count_1, 6] = oversights_mean
+                    Output[count_1, 7] = flights_mean
+                    Output[count_1, 8] = quickies_mean
+                    Output[count_1, 9] = prob_unsolved_mean
+                    Output[count_1, 10] = prob_shifts_mean
+                    Output[count_1, 11] = prob_active_mean
+                    Output[count_1, 12] = prob_latency_mean
+                    Output[count_1, 13] = dm_active_mean
+                    Output[count_1, 14] = dm_shifts_mean
+                    Output[count_1, 15] = energy_spent_mean
+                    Output[count_1, 16] = energy_excess_mean
+                    Output[count_1, 17] = choices_unsolved_mean
+                    Output[count_1, 18] = choices_active_mean
 
                     count_1 = count_1 + 1
 
-wbk = xlwt.Workbook()
-sheet1 = wbk.add_sheet('sheet1')
-for row1 in np.arange(243):
-    for col1 in np.arange(4+14):
-        sheet1.write(row1, col1, Output[row1, col1])
-wbk.save('model.xls')
+np.savetxt("my_data.csv", Output, delimiter=",", header="net_enery_load, energy_distribution, problems_choices, choices_decision makers, knowledge_distribution, Resolutions_mean, Oversights_mean, flights_mean, quickies_mean, prop_unsolved_mean, prop-shifts-mean, prob-active_mean, prob-latency-mean, dm_active_mean, dm_shifts_mean, energy_spent_mean, energy_excess_mean, choices_unsolved_mean, choices_active_mean")
+
+# wbk = xlwt.Workbook()
+# sheet1 = wbk.add_sheet('sheet1')
+# for row1 in np.arange(243):
+#     for col1 in np.arange(5+15):
+#         sheet1.write(row1, col1, Output[row1, col1])
+# wbk.save('model.xls')
 
 print("Done")
