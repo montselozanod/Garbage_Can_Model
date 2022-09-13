@@ -190,7 +190,7 @@ def garbage_can(A, D, E, nel, K, Entry_m, Entry_w):
     return(Choices, Problems, Members, Choices_energy_required,
            Choices_energy_spent)
 
-Output = np.zeros((81, 4 + 14))  # to capture the results, 4 for markers
+Output = np.zeros((243, 4 + 14))  # to capture the results, 4 for markers
 count_1 = 0
 
 # SIMULATION
